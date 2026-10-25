@@ -3,11 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task App</title>
+    <title>Task Management App</title>
 </head>
 <body>
-    <h1>Task App</h1>
-    <p>Welcome to the Task App!</p>
-    
+
+    <!-- Header Section -->
+    <header>
+        <h1>Task Management Dashboard</h1>
+        <p>Project Collaborators: <span>Member 1</span>, <span>Member 2</span></p>
+        <hr>
+    </header>
+
+    <!-- Navigation / Actions -->
+    <nav>
+        <a href="#create-task">Create New Task</a> | 
+        <a href="#todo-section">To Do</a> | 
+        <a href="#inprogress-section">In Progress</a> | 
+        <a href="#done-section">Completed</a>
+    </nav>
+
+    <hr>
+
+    <!-- Main Content Area -->
+    <main>
+
+        <!-- Create Task Form Section -->
+        <section id="create-task">
+            <h2>Add New Task</h2>
+            <form action="#" method="POST">
+                <div>
+                    <label for="task-title">Task Title:</label><br>
+                    <input type="text" id="task-title" name="title" required placeholder="Enter task title">
+                </div>
+                <br>
+                <div>
+                    <label for="task-desc">Task Description:</label><br>
+                    <textarea id="task-desc" name="description" rows="4" cols="40" placeholder="Enter task details..."></textarea>
+                </div>
+                <br>
+                <div>
+                    <label for="task-assignee">Assign To:</label><br>
+                    <select id="task-assignee" name="assignee">
+                        <option value="member1">Member 1</option>
+                        <option value="member2">Member 2</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="task-priority">Priority Level:</label><br>
+                    <select id="task-priority" name="priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <label for="task-due">Due Date:</label><br>
+                    <input type="date" id="task-due" name="due_date">
+                </div>
+                <br>
+                <div>
+                    <label for="task-status">Status Column:</label><br>
+                    <select id="task-status" name="status">
+                        <option value="todo">To Do</option>
+                        <option value="inprogress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <br>
+                <button type="submit">Save Task</button>
+            </form>
+        </section>
+
+        <hr>
+
+        <!-- Task Board Columns -->
+        <section id="board">
+            <h2>Task Board</h2>
+
+            <!-- Column: To Do -->
+            <article id="todo-section">
+                <h3>To Do (2)</h3>
+                
+                <!-- Task Card 1 -->
+                <fieldset>
+                    <legend>Task #1</legend>
+                    <h4>Setup GitHub Repository Structure</h4>
+                    <p>Initialize git repo, main branch protection rules, and invite collaborators.</p>
+                    <ul>
+                        <li><strong>Priority:</strong> High</li>
+                        <li><strong>Assigned to:</strong> Member 1</li>
+                        <li><strong>Due:</strong> 2026-11-01</li>
+                    </ul>
+                    <form action="#" method="POST">
+                        <label for="move-1">Move Status:</label>
+                        <select id="move-1" name="status">
+                            <option value="todo" selected>To Do</option>
+                            <option value="inprogress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </fieldset>
+
+                <br>
+
+                <!-- Task Card 2 -->
+                <fieldset>
+                    <legend>Task #2</legend>
+                    <h4>Design Database Schema</h4>
+                    <p>Create database table definitions for users, tasks, and project boards.</p>
+                    <ul>
+                        <li><strong>Priority:</strong> Medium</li>
+                        <li><strong>Assigned to:</strong> Member 2</li>
+                        <li><strong>Due:</strong> 2026-11-05</li>
+                    </ul>
+                    <form action="#" method="POST">
+                        <label for="move-2">Move Status:</label>
+                        <select id="move-2" name="status">
+                            <option value="todo" selected>To Do</option>
+                            <option value="inprogress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </fieldset>
+            </article>
+
+            <br>
+
+            <!-- Column: In Progress -->
+            <article id="inprogress-section">
+                <h3>In Progress (1)</h3>
+
+                <!-- Task Card 3 -->
+                <fieldset>
+                    <legend>Task #3</legend>
+                    <h4>Develop Pure HTML Structure</h4>
+                    <p>Build semantic HTML file containing layout structures for tasks and forms.</p>
+                    <ul>
+                        <li><strong>Priority:</strong> High</li>
+                        <li><strong>Assigned to:</strong> Member 1</li>
+                        <li><strong>Due:</strong> 2026-10-28</li>
+                    </ul>
+                    <form action="#" method="POST">
+                        <label for="move-3">Move Status:</label>
+                        <select id="move-3" name="status">
+                            <option value="todo">To Do</option>
+                            <option value="inprogress" selected>In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </fieldset>
+            </article>
+
+            <br>
+
+            <!-- Column: Done -->
+            <article id="done-section">
+                <h3>Completed (1)</h3>
+
+                <!-- Task Card 4 -->
+                <fieldset>
+                    <legend>Task #4</legend>
+                    <h4>Project Setup & Planning</h4>
+                    <p>Define project objectives and assign individual core file responsibilities.</p>
+                    <ul>
+                        <li><strong>Priority:</strong> Low</li>
+                        <li><strong>Assigned to:</strong> Member 2</li>
+                        <li><strong>Completed On:</strong> 2026-10-25</li>
+                    </ul>
+                    <form action="#" method="POST">
+                        <label for="move-4">Move Status:</label>
+                        <select id="move-4" name="status">
+                            <option value="todo">To Do</option>
+                            <option value="inprogress">In Progress</option>
+                            <option value="done" selected>Done</option>
+                        </select>
+                        <button type="submit">Update</button>
+                    </form>
+                </fieldset>
+            </article>
+
+        </section>
+
+    </main>
+
+    <hr>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2026 Task Management Project. Created for GitHub collaboration.</p>
+    </footer>
+
 </body>
 </html>
