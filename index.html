@@ -3,200 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Management App</title>
+    <meta name="description" content="A simple task manager to organize and track your work.">
+
+    <title>TeamFlow | Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div class="app-container">
 
-    <!-- Header Section -->
-    <header>
-        <h1>Task Management Dashboard</h1>
-        <p>Project Collaborators: <span>Member 1</span>, <span>Member 2</span></p>
-        <hr>
-    </header>
+        <!-- Header -->
+        <header class="app-header">
+            <a class="app-logo" href="#dashboard" aria-label="TeamFlow home">
+                <span class="logo-icon" aria-hidden="true">✓</span>
+                <span class="logo-text">TeamFlow</span>
+            </a>
 
-    <!-- Navigation / Actions -->
-    <nav>
-        <a href="#create-task">Create New Task</a> | 
-        <a href="#todo-section">To Do</a> | 
-        <a href="#inprogress-section">In Progress</a> | 
-        <a href="#done-section">Completed</a>
-    </nav>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a class="nav-link active" href="#dashboard">Dashboard</a>
+                <a class="nav-link" href="#board">My Tasks</a>
+            </nav>
 
-    <hr>
+            <button type="button" class="primary-button header-create-button" id="open-task-modal">
+                <span aria-hidden="true">+</span>
+                Create Task
+            </button>
+        </header>
 
-    <!-- Main Content Area -->
-    <main>
+        <main id="dashboard" class="main-content">
 
-        <!-- Create Task Form Section -->
-        <section id="create-task">
-            <h2>Add New Task</h2>
-            <form action="#" method="POST">
+            <!-- Page introduction -->
+            <section class="page-intro">
                 <div>
-                    <label for="task-title">Task Title:</label><br>
-                    <input type="text" id="task-title" name="title" required placeholder="Enter task title">
+                    <p class="eyebrow">YOUR WORKSPACE</p>
+                    <h1>Task Manager</h1>
+                    <p class="page-description">
+                        Organize your work, track your progress, and get things done.
+                    </p>
                 </div>
-                <br>
-                <div>
-                    <label for="task-desc">Task Description:</label><br>
-                    <textarea id="task-desc" name="description" rows="4" cols="40" placeholder="Enter task details..."></textarea>
-                </div>
-                <br>
-                <div>
-                    <label for="task-assignee">Assign To:</label><br>
-                    <select id="task-assignee" name="assignee">
-                        <option value="member1">Member 1</option>
-                        <option value="member2">Member 2</option>
-                    </select>
-                </div>
-                <br>
-                <div>
-                    <label for="task-priority">Priority Level:</label><br>
-                    <select id="task-priority" name="priority">
-                        <option value="low">Low</option>
-                        <option value="medium" selected>Medium</option>
-                        <option value="high">High</option>
-                    </select>
-                </div>
-                <br>
-                <div>
-                    <label for="task-due">Due Date:</label><br>
-                    <input type="date" id="task-due" name="due_date">
-                </div>
-                <br>
-                <div>
-                    <label for="task-status">Status Column:</label><br>
-                    <select id="task-status" name="status">
-                        <option value="todo">To Do</option>
-                        <option value="inprogress">In Progress</option>
-                        <option value="done">Done</option>
-                    </select>
-                </div>
-                <br>
-                <button type="submit">Save Task</button>
-            </form>
-        </section>
+            </section>
 
-        <hr>
+            <!-- Summary cards -->
+            <section class="task-summary" aria-label="Task summary">
+                <article class="summary-card">
+                    <div>
+                        <p class="summary-label">Total Tasks</p>
+                        <p class="summary-number" id="total-count">0</p>
+                    </div>
+                    <span class="summary-icon icon-total" aria-hidden="true">▤</span>
+                </article>
 
-        <!-- Task Board Columns -->
-        <section id="board">
-            <h2>Task Board</h2>
+                <article class="summary-card">
+                    <div>
+                        <p class="summary-label">To Do</p>
+                        <p class="summary-number" id="todo-count">0</p>
+                    </div>
+                    <span class="summary-icon icon-todo" aria-hidden="true">○</span>
+                </article>
 
-            <!-- Column: To Do -->
-            <article id="todo-section">
-                <h3>To Do (2)</h3>
-                
-                <!-- Task Card 1 -->
-                <fieldset>
-                    <legend>Task #1</legend>
-                    <h4>Setup GitHub Repository Structure</h4>
-                    <p>Initialize git repo, main branch protection rules, and invite collaborators.</p>
-                    <ul>
-                        <li><strong>Priority:</strong> High</li>
-                        <li><strong>Assigned to:</strong> Member 1</li>
-                        <li><strong>Due:</strong> 2026-11-01</li>
-                    </ul>
-                    <form action="#" method="POST">
-                        <label for="move-1">Move Status:</label>
-                        <select id="move-1" name="status">
-                            <option value="todo" selected>To Do</option>
-                            <option value="inprogress">In Progress</option>
-                            <option value="done">Done</option>
+                <article class="summary-card">
+                    <div>
+                        <p class="summary-label">In Progress</p>
+                        <p class="summary-number" id="inprogress-count">0</p>
+                    </div>
+                    <span class="summary-icon icon-progress" aria-hidden="true">◷</span>
+                </article>
+
+                <article class="summary-card">
+                    <div>
+                        <p class="summary-label">Completed</p>
+                        <p class="summary-number" id="done-count">0</p>
+                    </div>
+                    <span class="summary-icon icon-done" aria-hidden="true">✓</span>
+                </article>
+            </section>
+
+            <!-- Task board -->
+            <section id="board" class="task-board-section">
+                <div class="section-heading board-heading">
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Keep track of all your work in one place.</p>
+                    </div>
+
+                    <div class="task-filter">
+                        <label for="task-filter">Priority</label>
+                        <select id="task-filter" name="taskFilter">
+                            <option value="all">All priorities</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
                         </select>
-                        <button type="submit">Update</button>
-                    </form>
-                </fieldset>
+                    </div>
+                </div>
 
-                <br>
+                <div class="board-columns">
 
-                <!-- Task Card 2 -->
-                <fieldset>
-                    <legend>Task #2</legend>
-                    <h4>Design Database Schema</h4>
-                    <p>Create database table definitions for users, tasks, and project boards.</p>
-                    <ul>
-                        <li><strong>Priority:</strong> Medium</li>
-                        <li><strong>Assigned to:</strong> Member 2</li>
-                        <li><strong>Due:</strong> 2026-11-05</li>
-                    </ul>
-                    <form action="#" method="POST">
-                        <label for="move-2">Move Status:</label>
-                        <select id="move-2" name="status">
-                            <option value="todo" selected>To Do</option>
-                            <option value="inprogress">In Progress</option>
-                            <option value="done">Done</option>
+                    <!-- To Do -->
+                    <section
+                        id="todo-section"
+                        class="board-column todo-column"
+                        data-status="todo"
+                        aria-labelledby="todo-heading"
+                    >
+                        <header class="column-header">
+                            <div class="column-title-group">
+                                <span class="status-dot todo-dot" aria-hidden="true"></span>
+                                <h3 id="todo-heading">To Do</h3>
+                                <span class="column-count" id="todo-column-count">0</span>
+                            </div>
+                        </header>
+
+                        <div class="task-list" id="todo-list" aria-live="polite">
+                            <p class="empty-state" id="todo-empty">
+                                No tasks yet. Create your first task.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- In Progress -->
+                    <section
+                        id="inprogress-section"
+                        class="board-column inprogress-column"
+                        data-status="inprogress"
+                        aria-labelledby="inprogress-heading"
+                    >
+                        <header class="column-header">
+                            <div class="column-title-group">
+                                <span class="status-dot progress-dot" aria-hidden="true"></span>
+                                <h3 id="inprogress-heading">In Progress</h3>
+                                <span class="column-count" id="inprogress-column-count">0</span>
+                            </div>
+                        </header>
+
+                        <div class="task-list" id="inprogress-list" aria-live="polite">
+                            <p class="empty-state" id="inprogress-empty">
+                                Tasks you start will appear here.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Done -->
+                    <section
+                        id="done-section"
+                        class="board-column done-column"
+                        data-status="done"
+                        aria-labelledby="done-heading"
+                    >
+                        <header class="column-header">
+                            <div class="column-title-group">
+                                <span class="status-dot done-dot" aria-hidden="true"></span>
+                                <h3 id="done-heading">Done</h3>
+                                <span class="column-count" id="done-column-count">0</span>
+                            </div>
+                        </header>
+
+                        <div class="task-list" id="done-list" aria-live="polite">
+                            <p class="empty-state" id="done-empty">
+                                Completed tasks will appear here.
+                            </p>
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Create Task Popup -->
+        <div
+            class="modal-overlay"
+            id="task-modal"
+            aria-hidden="true"
+        >
+            <section
+                class="task-modal"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="create-task-title"
+            >
+                <header class="modal-header">
+                    <div>
+                        <p class="eyebrow">NEW TASK</p>
+                        <h2 id="create-task-title">Create a New Task</h2>
+                        <p>Add a task to your workspace.</p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="modal-close"
+                        id="close-task-modal"
+                        aria-label="Close popup"
+                    >&times;</button>
+                </header>
+
+                <form id="task-form" class="task-form">
+                    <div class="form-group">
+                        <label for="task-title">Task Title <span>*</span></label>
+                        <input
+                            type="text"
+                            id="task-title"
+                            name="title"
+                            placeholder="e.g. Design the homepage"
+                            maxlength="100"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-priority">Priority</label>
+                        <select id="task-priority" name="priority" required>
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
                         </select>
-                        <button type="submit">Update</button>
-                    </form>
-                </fieldset>
-            </article>
+                    </div>
 
-            <br>
+                    <div class="form-group form-group-full">
+                        <label for="task-description">Description</label>
+                        <textarea
+                            id="task-description"
+                            name="description"
+                            rows="3"
+                            maxlength="500"
+                            placeholder="Describe what needs to be done..."
+                        ></textarea>
+                    </div>
 
-            <!-- Column: In Progress -->
-            <article id="inprogress-section">
-                <h3>In Progress (1)</h3>
+                    <div class="form-group form-group-full">
+                        <label for="task-due-date">Due Date</label>
+                        <input type="date" id="task-due-date" name="dueDate">
+                    </div>
 
-                <!-- Task Card 3 -->
-                <fieldset>
-                    <legend>Task #3</legend>
-                    <h4>Develop Pure HTML Structure</h4>
-                    <p>Build semantic HTML file containing layout structures for tasks and forms.</p>
-                    <ul>
-                        <li><strong>Priority:</strong> High</li>
-                        <li><strong>Assigned to:</strong> Member 1</li>
-                        <li><strong>Due:</strong> 2026-10-28</li>
-                    </ul>
-                    <form action="#" method="POST">
-                        <label for="move-3">Move Status:</label>
-                        <select id="move-3" name="status">
-                            <option value="todo">To Do</option>
-                            <option value="inprogress" selected>In Progress</option>
-                            <option value="done">Done</option>
-                        </select>
-                        <button type="submit">Update</button>
-                    </form>
-                </fieldset>
-            </article>
+                    <footer class="modal-actions">
+                        <button
+                            type="button"
+                            class="secondary-button"
+                            id="cancel-task-modal"
+                        >Cancel</button>
 
-            <br>
+                        <button type="submit" class="primary-button">
+                            <span aria-hidden="true">+</span>
+                            Add Task
+                        </button>
+                    </footer>
+                </form>
+            </section>
+        </div>
 
-            <!-- Column: Done -->
-            <article id="done-section">
-                <h3>Completed (1)</h3>
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>TeamFlow &copy; 2026. Keep your work organized.</p>
+        </footer>
+    </div>
 
-                <!-- Task Card 4 -->
-                <fieldset>
-                    <legend>Task #4</legend>
-                    <h4>Project Setup & Planning</h4>
-                    <p>Define project objectives and assign individual core file responsibilities.</p>
-                    <ul>
-                        <li><strong>Priority:</strong> Low</li>
-                        <li><strong>Assigned to:</strong> Member 2</li>
-                        <li><strong>Completed On:</strong> 2026-10-25</li>
-                    </ul>
-                    <form action="#" method="POST">
-                        <label for="move-4">Move Status:</label>
-                        <select id="move-4" name="status">
-                            <option value="todo">To Do</option>
-                            <option value="inprogress">In Progress</option>
-                            <option value="done" selected>Done</option>
-                        </select>
-                        <button type="submit">Update</button>
-                    </form>
-                </fieldset>
-            </article>
+    <!-- Popup open/close behavior -->
+    <script>
+        const modal = document.getElementById("task-modal");
+        const openButtons = [
+            document.getElementById("open-task-modal"),
+            document.getElementById("open-task-modal-secondary")
+        ];
+        const closeButton = document.getElementById("close-task-modal");
+        const cancelButton = document.getElementById("cancel-task-modal");
+        const titleInput = document.getElementById("task-title");
+        const taskForm = document.getElementById("task-form");
 
-        </section>
+        function openModal() {
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("modal-open");
+            titleInput.focus();
+        }
 
-    </main>
+        function closeModal() {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("modal-open");
+        }
 
-    <hr>
+        openButtons.forEach(function (button) {
+            button.addEventListener("click", openModal);
+        });
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2026 Task Management Project. Created for GitHub collaboration.</p>
-    </footer>
+        closeButton.addEventListener("click", closeModal);
+        cancelButton.addEventListener("click", closeModal);
 
+        modal.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && modal.classList.contains("is-open")) {
+                closeModal();
+            }
+        });
+
+        // Prevent an accidental page reload until task creation is implemented.
+        taskForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            alert("The popup works! Task creation will be connected in script.js.");
+        });
+    </script>
 </body>
 </html>
